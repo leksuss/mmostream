@@ -30,13 +30,14 @@ def get_random_videofile(path):
 
 
 def gen_command_string(file, url, key):
-    command = f'fmpeg -re -i "{file}" -codec: copy -f flv {url}{key}'
+    command = f'ffmpeg -re -i "{file}" -codec: copy -f flv {url}/{key}'
     return command
 
 
 def streamit(dir_video, stream_url, stream_key):
-    print(f'Playing random videofile from path: {dir_video}')
-    print(f'Sendign stream to url: {stream_url}{stream_key}')
+    print(f'Playing random video file from path: {dir_video}')
+    print(f'Sendign stream to url: {stream_url}/{stream_key}')
+    print()
     while True:
         videofile = get_random_videofile(dir_video)
         run_command(gen_command_string(videofile, stream_url, stream_key))
