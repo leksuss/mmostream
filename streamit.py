@@ -2,6 +2,7 @@ import subprocess
 import shlex
 from os import walk
 from random import choice
+from cli import get_cli_args
 
 
 def run_command(command):
@@ -28,10 +29,19 @@ def get_random_videofile(path):
     return choice(list_of_files(path))
 
 
-dir_video = 'video'
-stream_key = '17wh-vhr8-5f9q-s9hb-9j6f'
-stream_url = 'rtmp://a.rtmp.youtube.com/live2/'
+def gen_command_string(file, url, key):
+    command = f'fmpeg -re -i "{file}" -codec: copy -f flv {url}{key}'
+    return command
 
-while True:
-    videofile = get_random_videofile(dir_video)
-    run_command(f'ffmpeg -re -i "{videofile}" -codec: copy -f flv {stream_url}{stream_key}')
+
+def streamit(dir_video, stream_url, stream_key):
+    print(f'Playing random videofile from path: {dir_video}')
+    print(f'Sendign stream to url: {stream_url}{stream_key}')
+    while True:
+        videofile = get_random_videofile(dir_video)
+        run_command(gen_command_string(videofile, stream_url, stream_key))
+
+
+if __name__ == '__main__':
+    args = get_cli_args()
+    streamit(args.path, args.url, args.key)

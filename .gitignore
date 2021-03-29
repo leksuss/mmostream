@@ -1,6 +1,12 @@
 # video files
 video/
 
+# test files
+test.py
+
+#macos service files
+.DS_Store
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

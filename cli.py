@@ -17,7 +17,7 @@ def get_cli_args():
         '-k',
         '--key',
         type=str,
-        default='',
+        required=True,
         help='youtube stream key',
     )
     parser.add_argument(
@@ -29,8 +29,3 @@ def get_cli_args():
     )
 
     return parser.parse_args()
-
-
-def print_result_of(difference: str) -> None:
-    """Print difference of two files."""
-    print(difference)
