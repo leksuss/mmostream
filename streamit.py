@@ -1,7 +1,10 @@
-import subprocess
-import shlex
 from os import walk
 from random import choice
+import subprocess
+import shlex
+import time
+
+
 from cli import get_cli_args
 
 
@@ -34,15 +37,20 @@ def gen_command_string(file, url, key):
     return command
 
 
-def streamit(dir_video, stream_url, stream_key):
-    print(f'Playing random video file from path: {dir_video}')
-    print(f'Sendign stream to url: {stream_url}/{stream_key}')
+def streamit(args):
+    print(f'Playing random video file from path: {args.path}')
+    print(f'Sendign stream to url: {args.url}/{args.key}')
     print()
+    timer = time.time()
     while True:
-        videofile = get_random_videofile(dir_video)
-        run_command(gen_command_string(videofile, stream_url, stream_key))
+        if time.time() - timer > args.break_every:
+            print(f'Going to sleep {args.break_timeout} seconds')
+            time.sleep(args.break_timeout)
+            timer = time.time()
+        videofile = get_random_videofile(args.path)
+        run_command(gen_command_string(videofile, args.url, args.key))
 
 
 if __name__ == '__main__':
     args = get_cli_args()
-    streamit(args.path, args.url, args.key)
+    streamit(args)

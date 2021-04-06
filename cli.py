@@ -27,5 +27,18 @@ def get_cli_args():
         default='rtmp://a.rtmp.youtube.com/live2',
         help='youtube stream url',
     )
-
+    parser.add_argument(
+        '-b',
+        '--break_every',
+        type=int,
+        help='Break stream every x seconds',
+    )
+    parser.add_argument(
+        '-t',
+        '--break_timeout',
+        type=int,
+        default=3,
+        help='Delay in seconds between streams which are created by --break_every key',
+    )
     return parser.parse_args()
+
