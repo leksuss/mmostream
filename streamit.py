@@ -30,7 +30,7 @@ def get_random_videofile(path):
 
 
 def gen_command_string(file, url, key):
-    command = f'ffmpeg -re -i "{file}" -codec: copy -f flv {url}/{key}'
+    command = f'ffmpeg -re -i "{file}" -codec: copy -f flv -flvflags no_duration_filesize {url}/{key}'
     return command
 
 
