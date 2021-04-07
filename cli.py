@@ -37,8 +37,9 @@ def get_cli_args():
         '-t',
         '--break_timeout',
         type=int,
-        default=3,
+        default=180,
         help='Delay in seconds between streams which are created by --break_every key',
     )
+    
     return parser.parse_args()
 

@@ -4,7 +4,6 @@ import subprocess
 import shlex
 import time
 
-
 from cli import get_cli_args
 
 
@@ -43,7 +42,7 @@ def streamit(args):
     print()
     timer = time.time()
     while True:
-        if time.time() - timer > args.break_every:
+        if args.break_every is not None and time.time() - timer > args.break_every:
             print(f'Going to sleep {args.break_timeout} seconds')
             time.sleep(args.break_timeout)
             timer = time.time()
