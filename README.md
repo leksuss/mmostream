@@ -23,3 +23,7 @@ And use it like this (default url is `rtmp://a.rtmp.youtube.com/live2`):
 
 
 This is runtime tool, so the better way is run it inside **tmux**, **screen** or something.
+
+### Bonus: converting script
+
+If you received a bad keyframe message from youtube broadcast service, you need to convert videofiles with to force key frame every 2-3 seconds. See [ffmpeg documentation](https://ffmpeg.org/ffmpeg.html) for all the functions and their details. You can use `convert.py` script to do this. Just set `path` and `dest_path` to specify source/dest dir with video files. 
